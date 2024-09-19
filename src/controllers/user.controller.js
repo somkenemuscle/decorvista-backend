@@ -1,4 +1,4 @@
-import { User } from '../models/user.model.js'
+import { homeOwner } from '../models/homeOwner.model.js';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken } from '../auth/auth.js'
 import 'dotenv/config';

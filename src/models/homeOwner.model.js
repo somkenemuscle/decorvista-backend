@@ -27,5 +27,5 @@ const homeOwnerSchema = new Schema({
     }
 });
 
-export const homeOwner = mongoose.model('User',  homeOwnerSchema);
+export const homeOwner = mongoose.model('homeOwner',  homeOwnerSchema);
 

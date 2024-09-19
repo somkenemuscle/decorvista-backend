@@ -39,4 +39,4 @@ const interiorDesignerSchema = new Schema({
 
 });
 
-export const interiorDesigner = mongoose.model('InteriroDesigner', interiorDesignerSchema);
+export const interiorDesigner = mongoose.model('InteriorDesigner', interiorDesignerSchema);
