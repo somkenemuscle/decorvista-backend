@@ -3,7 +3,6 @@ import express from 'express';
 import corsMiddleware from './middleware/cors.js';
 import passport from 'passport';
 import userRoutes from './routes/user.routes.js';
-import tweetRoutes from './routes/tweet.routes.js';
 import cookieParser from 'cookie-parser';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import throttle from './middleware/throttle.js';
@@ -45,7 +44,6 @@ app.use('/api/', apiLimiter);
 
 // routing logic
 app.use('/api/auth', userRoutes);
-app.use('/api/tweets', tweetRoutes);
 
 
 
