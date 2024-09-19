@@ -2,8 +2,12 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 // User Schema
-const userSchema = new Schema({
-    username: {
+const homeOwnerSchema = new Schema({
+    role:{
+        type:String,
+        required:[true,'role is required'],
+    },
+    fullname: {
         type: String,
         required: [true, 'Username is required'],
         unique: [true, 'User already exists'],
@@ -23,5 +27,5 @@ const userSchema = new Schema({
     }
 });
 
-export const User = mongoose.model('User', userSchema);
+export const homeOwner = mongoose.model('homeOwner',  homeOwnerSchema);
 
