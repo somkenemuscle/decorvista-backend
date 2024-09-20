@@ -21,10 +21,6 @@ const interiorDesignerSchema = new Schema({
         type: String,
         required: [true, 'Password is required']
     },
-    Experience: {
-        type: Number,
-        required: [true, 'years of experience is required'],
-    },
     portfolio: {
         type: String,
     },
