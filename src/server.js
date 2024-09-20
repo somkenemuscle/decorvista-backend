@@ -8,5 +8,5 @@ connectDb();
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Retweet server is running on http://localhost:${PORT}`);
+    console.log(`Decorvista server is running on http://localhost:${PORT}`);
 });

@@ -17,7 +17,7 @@ export default function connectDb() {
 
     // Connect to MongoDB without deprecated options
     mongoose.connect(dbUrl)
-    .then(() => console.log('Retweet app has connected to the database'))
+    .then(() => console.log('Decorvista app has connected to the database'))
     .catch(err => {
         console.error('Error connecting to database:', err);
         process.exit(1); // Exit the process with an error code on failure
