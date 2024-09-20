@@ -25,6 +25,12 @@ const homeOwnerSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Product', // Refers to the Product schema
         },
+    ],
+    savedProducts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Product', // Refers to the Product schema
+        },
     ]
 });
 

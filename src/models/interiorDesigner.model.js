@@ -28,6 +28,15 @@ const interiorDesignerSchema = new Schema({
     portfolio: {
         type: String,
     },
+    specialization: {
+        type: String,
+    },
+    phoneNumber: {
+        type: Number
+    },
+    about: {
+        type: String
+    },
     cart: [
         {
             type: Schema.Types.ObjectId,
