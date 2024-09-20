@@ -27,7 +27,13 @@ const interiorDesignerSchema = new Schema({
     },
     portfolio: {
         type: String,
-    }
+    },
+    cart: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Product', // Refers to the Product schema
+        },
+    ],
 
 });
 

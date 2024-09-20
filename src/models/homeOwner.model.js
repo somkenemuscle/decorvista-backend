@@ -19,7 +19,13 @@ const homeOwnerSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required']
-    }
+    },
+    cart: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Product', // Refers to the Product schema
+        },
+    ]
 });
 
 export const homeOwner = mongoose.model('homeOwner', homeOwnerSchema);

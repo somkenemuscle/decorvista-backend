@@ -93,12 +93,6 @@ export const signUpInteriorDesigner = async (req, res) => {
 
 
 
-
-
-
-
-
-
 // Sign In Controller Function
 export const signInHomeOwner = async (req, res) => {
     const { email, password } = req.body;
@@ -112,10 +106,10 @@ export const signInHomeOwner = async (req, res) => {
 
     if (existingHomeOwner) {
         user = existingHomeOwner;
-       
+
     } else if (existingInteriorDesigner) {
         user = existingInteriorDesigner;
-    
+
     } else {
         return res.status(404).json({ message: 'User not found', code: 'USER_NOT_FOUND' });
     }
@@ -134,10 +128,10 @@ export const signInHomeOwner = async (req, res) => {
     setAccessToken(res, accessToken);
     setRefreshToken(res, refreshToken);
 
-    return res.status(200).json({ 
-        message: 'Sign In successful', 
+    return res.status(200).json({
+        message: 'Sign In successful',
         fullname: user.fullname,
-        
+
     });
 };
 
