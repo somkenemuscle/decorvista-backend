@@ -11,6 +11,7 @@ dotenv.config();
 
 // Sign Up Controller Function
 export const signUpHomeOwner = async (req, res) => {
+
     const { fullname, email, password } = req.body;
 
     // Check if homeOwner or interiorDesigner already exists
@@ -39,9 +40,12 @@ export const signUpHomeOwner = async (req, res) => {
     const accessToken = generateAccessToken(newHomeOwner);
     const refreshToken = generateRefreshToken(newHomeOwner);
 
+    console.log(newHomeOwner, 'hi')
+
     // Set cookies
     setAccessToken(res, accessToken);
     setRefreshToken(res, refreshToken);
+
 
     // Respond with success message
     res.status(201).json({ message: 'homeOwner registered successfully', fullname });
@@ -64,7 +68,7 @@ export const signUpInteriorDesigner = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new homeOwner
-    const newInteriorDesigner = new homeOwner({
+    const newInteriorDesigner = new interiorDesigner({
         fullname,
         email,
         yearsOfExpereience,
@@ -74,6 +78,8 @@ export const signUpInteriorDesigner = async (req, res) => {
 
     // Save the homeOwner to the database
     await newInteriorDesigner.save();
+    //
+
 
     // Generate tokens using the imported function
     const accessToken = generateAccessToken(newInteriorDesigner);
@@ -84,7 +90,7 @@ export const signUpInteriorDesigner = async (req, res) => {
     setRefreshToken(res, refreshToken);
 
     // Respond with success message
-    res.status(201).json({ message: 'homeOwner registered successfully', fullname });
+    res.status(201).json({ message: 'Interior Designer registered successfully', fullname });
 };
 
 
@@ -97,37 +103,44 @@ export const signUpInteriorDesigner = async (req, res) => {
 
 // Sign In Controller Function
 export const signInHomeOwner = async (req, res) => {
-    // Validate the request body using Joi
-    const { error } = signInSchema.validate(req.body);
-    if (error) {
-        return res.status(400).json({ message: error.details[0].message });
-    }
-    const { fullname, password } = req.body;
+    const { email, password } = req.body;
 
-    // Check if the homeOwner exists by their fullname
-    const existingHomeOwner = await homeOwner.findOne({ fullname });
+    // Check if homeOwner or interiorDesigner exists
+    const existingHomeOwner = await homeOwner.findOne({ email });
+    const existingInteriorDesigner = await interiorDesigner.findOne({ email });
 
-    if (!existingHomeOwner) {
-        return res.status(404).json({ message: 'homeOwner not found' });
-    }
+    let user = null;
 
-    // Compare the provided password with the hashed password in the database
-    const passwordMatch = await bcrypt.compare(password, existingHomeOwner.password);
 
-    if (passwordMatch) {
-        // Passwords match, generate JWT tokens
-        const accessToken = generateAccessToken(existingHomeOwner);
-        const refreshToken = generateRefreshToken(existingHomeOwner);
-
-        // Set cookies
-        setAccessToken(res, accessToken);
-        setRefreshToken(res, refreshToken);
-
-        return res.status(200).json({ message: 'Sign In successful', fullname });
+    if (existingHomeOwner) {
+        user = existingHomeOwner;
+       
+    } else if (existingInteriorDesigner) {
+        user = existingInteriorDesigner;
+    
     } else {
-        // Passwords don't match
-        return res.status(401).json({ message: 'Invalid fullname or password', code: 'INVALID_FULLNAME_OR_PASSWORD' });
+        return res.status(404).json({ message: 'User not found', code: 'USER_NOT_FOUND' });
     }
+
+    // Compare the provided password with the hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+        return res.status(401).json({ message: 'Invalid password', code: 'INVALID_PASSWORD' });
+    }
+
+    // Passwords match, generate JWT tokens
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    // Set tokens as cookies
+    setAccessToken(res, accessToken);
+    setRefreshToken(res, refreshToken);
+
+    return res.status(200).json({ 
+        message: 'Sign In successful', 
+        fullname: user.fullname,
+        
+    });
 };
 
 // Log Out Controller Function
