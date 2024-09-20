@@ -40,8 +40,6 @@ export const signUpHomeOwner = async (req, res) => {
     const accessToken = generateAccessToken(newHomeOwner);
     const refreshToken = generateRefreshToken(newHomeOwner);
 
-    console.log(newHomeOwner, 'hi')
-
     // Set cookies
     setAccessToken(res, accessToken);
     setRefreshToken(res, refreshToken);
