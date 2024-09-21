@@ -69,7 +69,6 @@ export const signUpInteriorDesigner = async (req, res) => {
     const newInteriorDesigner = new interiorDesigner({
         fullname,
         email,
-        yearsOfExpereience,
         portfolio,
         about,
         specialization,
