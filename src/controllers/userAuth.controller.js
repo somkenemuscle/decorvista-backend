@@ -46,7 +46,7 @@ export const signUpHomeOwner = async (req, res) => {
 
 
     // Respond with success message
-    res.status(201).json({ message: 'homeOwner registered successfully', fullname });
+    res.status(201).json({ message: 'user registered successfully', fullname });
 };
 
 
@@ -89,7 +89,7 @@ export const signUpInteriorDesigner = async (req, res) => {
     setRefreshToken(res, refreshToken);
 
     // Respond with success message
-    res.status(201).json({ message: 'Interior Designer registered successfully', fullname });
+    res.status(201).json({ message: 'user registered successfully', fullname });
 };
 
 
