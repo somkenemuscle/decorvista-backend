@@ -52,7 +52,7 @@ export const signUpHomeOwner = async (req, res) => {
 
 // Sign Up Controller Function
 export const signUpInteriorDesigner = async (req, res) => {
-    const { fullname, email, password, portfolio,about,specialization } = req.body;
+    const { fullname, email, password, portfolio, about, specialization } = req.body;
 
     // Check if homeOwner or interiorDesigner already exists
     const existingHomeOwner = await homeOwner.findOne({ email });
