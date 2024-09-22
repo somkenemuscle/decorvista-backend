@@ -118,7 +118,7 @@ export const signInHomeOwner = async (req, res) => {
     // Compare the provided password with the hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-        return res.status(401).json({ message: 'Invalid password', code: 'INVALID_PASSWORD' });
+        return res.status(401).json({ message: 'Invalid username or password', code: 'INVALID_PASSWORD' });
     }
 
     // Passwords match, generate JWT tokens
